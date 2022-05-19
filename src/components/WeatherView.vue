@@ -43,10 +43,7 @@ export default {
             } else if(data.weather.weather[0].main.indexOf('Sunny') > 0) {
                 document.body.className = 'sunny';
             }
-        }).catch(
-            // err => console.log(err)
-            console.log("Erreur")
-            )
+        }).catch(err => console.log(err));
         }
 
         return {
