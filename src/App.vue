@@ -1,13 +1,15 @@
 <template>
-  <div class="content">
-    <h1 class="animate__animated animate__slideInDown animate__delay-.5s"><i class="ri-sun-fill"></i> Weather App</h1>
-    <div class="content-app">
+  <div class="grid-container">
+    <header class="header">
+      <h1 class="animate__animated animate__slideInDown animate__delay-.5s"><i class="ri-sun-fill"></i> Weather App</h1>
+    </header>
+    <main class="main">
       <weather-view />
       <clock-view />
-      <div class="footer">
-        <p>@ 2022 Weather App</p>
-      </div>
-    </div>
+    </main>
+    <footer class="footer">
+      <p>@ 2022 Weather App</p>
+    </footer>
   </div>
 </template>
 
@@ -36,43 +38,84 @@ export default {
 }
 
 body {
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
+  place-items: center;
+}
+
+.grid-container {
   display: grid;
-	grid-template-rows: auto 1fr auto;
+  grid-template-areas: 
+    "header"
+    "main"
+    "footer";
+  grid-template-rows: auto 1fr auto;
+  width: 100%;
+  height: 100vh;
+  background-color: #f3f3f3;
+}
+
+h1 {
+  color: #3e4f60;
 }
 
 .ri-sun-fill {
   color: #d7c151;
-  font-size: 60px;
 }
 
-.content-app {
-  background-image: linear-gradient(
-    to right top,
-    #99bbcb,
-    #a5c7d7,
-    #b1d4e2,
-    #bde0ee,
-    #c9edfa
-  );
+.header {
+  grid-area: header;
+  text-align: center;
+  padding: 20px;
+}
+
+.main {
+  grid-area: main;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+  background-color: #B1D4E2;
 }
 
 .footer {
+  grid-area: footer;
+  text-align: center;
+  padding: 20px;
   background-color: #3e4f60;
-  width: 100%;
-  padding: 50px;
-}
-
-.footer p {
   color: #bbb;
 }
 
-#app {
-  font-family: 'Montserrat', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #3e4f60;
-  margin-top: 20px;
+@media (max-width: 768px) {
+  .main {
+    grid-template-columns: 1fr;
+    padding: 10px;
+  }
+
+  .header, .footer {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.2em;
+  }
+
+  .main {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 5px;
+  }
+
+  .footer {
+    padding: 5px;
+  }
 }
 </style>

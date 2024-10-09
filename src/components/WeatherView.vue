@@ -10,9 +10,15 @@
             <p>{{ data.weather.weather[0].description }}</p>
             <p>Humidité : {{ data.weather.main.humidity }}%</p>
         </div>
+        <!-- <div v-else v-pre>
+            <p>Erreur, veuillez entrer une ville correcte</p>
+        </div> -->
         <div class="w animate__animated animate__backInLeft animate__delay-.5s" v-if="data.weather">
             <p><i class="ri-windy-fill"></i> {{ data.weather.wind.speed }} km/h</p>
             <p><i class="ri-cloud-windy-fill"></i> {{ data.weather.wind.gust }} km/h</p>
+        </div>
+        <div v-else>
+            <!-- <p>Erreur, veuillez entrer une ville correcte</p> -->
         </div>
     </div>
 </template>
@@ -61,9 +67,12 @@ export default {
   font-size: 1.3em;
   color: rgb(63, 102, 186);
   height: 50vh;
-  display: flex;
+  display: grid;
   align-items: center;
   justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items: end;
+  align-content: center;
 }
 
 p {
@@ -119,6 +128,8 @@ h1 {
   text-align: center;
   font-size: 4em;
   margin-bottom: 25px;
+  z-index: 1000;
+  position: relative;
 }
 
 @media (max-width: 900px) { 
