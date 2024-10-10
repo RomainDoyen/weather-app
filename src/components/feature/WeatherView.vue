@@ -1,10 +1,9 @@
 <template>
     <div class="content-weather">
         <div class="enter-city animate__animated animate__pulse animate__repeat-2 animate__delay-1s">
-            <input v-model="data.city" @keyup.enter="getWeather" placeholder="Entrer vôtre ville" type="text">
-            <i class="ri-send-plane-2-fill"></i>
+            <SearchForm v-model="data.city" @submit="getWeather" />
         </div>
-        <div class="weather animate__animated animate__backInLeft animate__delay-.5s"  v-if="data.weather">
+        <div class="weather animate__animated animate__backInLeft animate__delay-.5s" v-if="data.weather">
             <p>{{ data.weather.name }}, {{ data.weather.sys.country }}</p>
             <h1>{{ Math.round(data.weather.main.temp) }}&deg;C</h1>
             <p>{{ data.weather.weather[0].description }}</p>
@@ -26,8 +25,12 @@
 <script>
 import { reactive } from 'vue'
 import axios from 'axios'
+import SearchForm from '../ui/SearchForm.vue'
 
 export default {
+    components: {
+        SearchForm
+    },
     name: 'WeatherView',
     setup() {
         let data = reactive({
@@ -89,14 +92,6 @@ i {
     align-items: center;
 }
 
-.ri-send-plane-2-fill {
-    margin-left: 10px;
-    background-color: rgb(63, 102, 186);
-    color: white;
-    border-radius: 5px;
-    padding: 7px;
-}
-
 .weather {
     transition: all .1s ease-out;
     transition-timing-function: ease-in-out;
@@ -112,20 +107,6 @@ i {
 .weather:focus-visible {
     transition-property: opacity, left;
     transition-duration: .3s, .5s;
-}
-
-.enter-city input {
-    border: none;
-    outline: none;
-    border-radius: 5px;
-    padding: 15px;
-    width: 50vh;
-    font-size: 20px;
-    color: #ec0062;
-    font-weight: 400;
-    box-shadow: 2px 2px 10px 0px rgba(119, 119, 119, 0.59);
-    -moz-box-shadow: 2px 2px 10px 0px rgba(119, 119, 119, 0.59);
-    -webkit-box-shadow: 2px 2px 10px 0px rgba(119, 119, 119, 0.59);
 }
 
 h1 {
@@ -154,5 +135,4 @@ h1 {
         margin-top: 20px;
     }
 }
-
 </style>

@@ -1,7 +1,11 @@
 <template>
-  <form class="form">
+  <form class="form" @submit.prevent="onSubmit">
       <label for="search">
-          <input autocomplete="off" placeholder="search your chats" id="search" type="text">
+          <SearchInput 
+            v-model="internalValue" 
+            placeholder="Entrer votre ville"
+            @enter="onSubmit"
+          />
           <div class="icon">
               <svg stroke-width="2" stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="swap-on">
                   <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linejoin="round" stroke-linecap="round"></path>
@@ -19,6 +23,38 @@
   </form>
 </template>
 
+<script>
+import SearchInput from './SearchInput.vue'
+
+export default {
+  components: {
+    SearchInput
+  },
+  props: {
+    modelValue: String,
+  },
+  data() {
+    return {
+      internalValue: this.modelValue,
+    };
+  },
+  watch: {
+    modelValue(newValue) {
+      this.internalValue = newValue;
+    },
+    internalValue(newValue) {
+      this.$emit('update:modelValue', newValue);
+    },
+  },
+  emits: ['update:modelValue', 'submit'],
+  methods: {
+    onSubmit() {
+      this.$emit('submit', this.internalValue);
+    },
+  },
+};
+</script>
+
 <style>
 .form {
   --input-bg: #FFf;
@@ -26,8 +62,8 @@
   --rotate: 80deg;
   --gap: 2em;
   --icon-change-color: #15A986;
-  --height: 40px;
-  width: 200px;
+  --height: 50px;
+  width: 300px;
   padding-inline-end: 1em;
   background: var(--input-bg);
   position: relative;
@@ -47,6 +83,8 @@
   outline: none;
   background: none;
   border: 0;
+  font-size: large;
+  color: #ec0062;
 }
 
 .form svg {
