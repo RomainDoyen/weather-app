@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import WeatherView from './components/WeatherView.vue'
-import ClockView from './components/ClockView.vue'
+import WeatherView from './components/feature/WeatherView.vue'
+import ClockView from './components/feature/ClockView.vue'
 import 'remixicon/fonts/remixicon.css'
 
 export default {

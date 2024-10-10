@@ -66,12 +66,10 @@ export default {
   font-weight: 500;
   font-size: 1.3em;
   color: rgb(63, 102, 186);
-  height: 50vh;
   display: grid;
   align-items: center;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  align-items: end;
   align-content: center;
 }
 
@@ -102,6 +100,13 @@ i {
 .weather {
     transition: all .1s ease-out;
     transition-timing-function: ease-in-out;
+}
+
+.w, .weather {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px;
 }
 
 .weather:focus-visible {
